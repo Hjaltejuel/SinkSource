@@ -15,75 +15,11 @@ public class Connector {
     static ConcurrentLinkedQueue<Socket> sinks = new ConcurrentLinkedQueue<>();
     public static void main(String[] args) {
 
-
-
             activateSinks();
 
             activateSources();
-            Thread SourceSpawner = new Thread(() -> {
-                ServerSocket sourcesInc = null;
-                try {
-                    sourcesInc = new ServerSocket(7000);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                while (true) {
-                    try {
-                        Socket source = sourcesInc.accept();
-                        System.out.println("A source Process is starting" + '\n');
-                        new Thread(() -> {
-                            Socket currentSocket = null;
-                            BufferedReader inFromSources = null;
-                            try {
-                                inFromSources = new BufferedReader(new InputStreamReader(source.getInputStream()));
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                            while (true) {
-                                String input = null;
-                                try {
-                                    input = inFromSources.readLine();
-                                } catch (IOException e) {
-                                    System.out.println("Source has been closed" + '\n');
-                                    return;
-                                }
-                                if (input != null) {
-                                    if (!input.equals("null")) {
-                                        System.out.println("A message has been sent from a source, now sending to sinks" + '\n');
-                                        for (Socket socket : sinks) {
-                                            currentSocket = socket;
-                                            DataOutputStream out = null;
-                                            try {
-                                                out = new DataOutputStream(socket.getOutputStream());
-                                            } catch (IOException e) {
-                                                e.printStackTrace();
-                                            }
-                                            try {
-                                                out.writeBytes(input + '\n');
-                                            } catch (SocketException e) {
-                                                sinks.remove(currentSocket);
-                                                System.out.println("A sink has been closed, and will be removed" + '\n');
-                                            } catch (IOException e) {
-                                                e.printStackTrace();
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-
-
-
-                        }).start();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-
-        SourceSpawner.start();
 
         }
-
         public static void activateSources(){
             Thread SourceSpawner = new Thread(() -> {
                 ServerSocket sourcesInc = null;
@@ -102,6 +38,7 @@ public class Connector {
                     }
                 }
             });
+            SourceSpawner.start();
         }
         public static void activateSourceThread(Socket source){
             new Thread(() -> {
