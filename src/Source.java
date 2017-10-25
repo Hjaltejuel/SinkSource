@@ -41,6 +41,7 @@ public class Source {
                 }
             } catch (Exception var10) {
                 var10.printStackTrace();
+                //close the connection
             } finally {
                 connectSocket.close();
             }
