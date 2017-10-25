@@ -13,12 +13,9 @@ public class Sink {
             e.printStackTrace();
         }
         try {
-            DataOutputStream toServer = new DataOutputStream(connectSocket.getOutputStream());
             BufferedReader inFromServer = new BufferedReader(new InputStreamReader(connectSocket.getInputStream()));
             while(true) {
-                System.out.println("hello");
                 String output = inFromServer.readLine();
-                System.out.println("We made it");
                 System.out.println(output);
             }
 

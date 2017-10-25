@@ -21,10 +21,10 @@ public class Connector {
                     new BufferedReader(new InputStreamReader(sources.getInputStream()));
             DataOutputStream outToSinks = new DataOutputStream(sinks.getOutputStream());
             while(true){
-                String output = inFromSources.readLine();
-                System.out.println("I HAVE RECIEVED AN ANSWER " + output);
-                outToSinks.writeBytes(output);
-                System.out.println("I HAVE SEND AN ANSWER " + output);
+                String input = inFromSources.readLine();
+                System.out.println("I HAVE RECIEVED AN ANSWER " + input);
+                outToSinks.writeBytes(input + '\n');
+
             }
         } catch (IOException e) {
             e.printStackTrace();
