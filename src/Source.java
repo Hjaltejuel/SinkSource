@@ -22,7 +22,7 @@ public class Source {
                  * connectSocket creates a new socket which takes an IP-address and a port.
                  * Both of which is used to connect to a Connector.
                  */
-                connectSocket = new Socket("10.26.44.186", 7000);
+                connectSocket = new Socket("localhost", 7000);
             } catch (IOException var9) {
                 var9.printStackTrace();
             }

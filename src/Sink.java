@@ -13,7 +13,7 @@ public class Sink {
          */
         try {
 
-            connectSocket = new Socket("10.26.44.186", 7200);
+            connectSocket = new Socket("localhost", 7200);
         } catch (IOException e) {
             e.printStackTrace();
         }
