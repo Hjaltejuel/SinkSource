@@ -8,7 +8,7 @@ public class Sink {
     public static void main(String[] args) throws IOException {
         Socket connectSocket = null;
         try {
-            connectSocket = new Socket("10:26:1:118", 7200);
+            connectSocket = new Socket("localhost", 7200);
         } catch (IOException e) {
             e.printStackTrace();
         }
