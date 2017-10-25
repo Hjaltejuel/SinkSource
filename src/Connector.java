@@ -50,8 +50,11 @@ public class Connector {
                                 while (true) {
 
                                     String input = inFromSources.readLine();
+                                    System.out.println("I HAVE RECIEVED :" + input + " AND I AM NOW SENDING TO SINKS");
+                                    int i = 0;
                                     for (Socket socket : sinks) {
-                                        System.out.println("");
+                                        i++;
+                                        System.out.println(i);
                                         DataOutputStream out = new DataOutputStream(socket.getOutputStream());
                                         out.writeBytes(input + '\n');
                                     }
