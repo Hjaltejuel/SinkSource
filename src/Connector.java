@@ -15,6 +15,8 @@ public class Connector {
             ServerSocket sinksInc = new ServerSocket(7200);
             Socket sources = sourcesInc.accept();
             Socket sinks = sinksInc.accept();
+            System.out.println(sinks.getInputStream());
+            System.out.println(sources.getInputStream());
             BufferedReader inFromSources =
                     new BufferedReader(new InputStreamReader(sources.getInputStream()));
             DataOutputStream outToSinks = new DataOutputStream(sinks.getOutputStream());
@@ -22,6 +24,7 @@ public class Connector {
                 String output = inFromSources.readLine();
                 System.out.println("I HAVE RECIEVED AN ANSWER " + output);
                 outToSinks.writeBytes(output);
+                System.out.println("I HAVE SEND AN ANSWER " + output);
             }
         } catch (IOException e) {
             e.printStackTrace();

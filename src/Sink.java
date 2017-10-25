@@ -1,7 +1,4 @@
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.Socket;
 
 /**
@@ -16,17 +13,17 @@ public class Sink {
             e.printStackTrace();
         }
         try {
-            String output;
+            DataOutputStream toServer = new DataOutputStream(connectSocket.getOutputStream());
             BufferedReader inFromServer = new BufferedReader(new InputStreamReader(connectSocket.getInputStream()));
-            while (true) {
-                output = inFromServer.readLine();
+            while(true) {
+                System.out.println("hello");
+                String output = inFromServer.readLine();
+                System.out.println("We made it");
                 System.out.println(output);
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            connectSocket.close();
         }
     }
 }
